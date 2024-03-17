@@ -46,10 +46,12 @@ class IntradayPricePredictor:
         
         df['date'] = df.index.date
         df['day_change'] = df['date'] != df['date'].shift(1)
-
-        filtered_returns = df[df['day_change'] == False][self.return_type]
-
-        self.data_frames[ticker] = filtered_returns
+        
+        # filtered_returns = df[df['day_change'] == False][self.return_type]
+        # self.data_frames[ticker] = filtered_returns
+        
+        df = df[df['day_change'] == False]
+        self.data_frames[ticker] = df
         
     def construct_data_matrix(self, ticker, chosen_regressors, lags=60):
         """
@@ -59,27 +61,22 @@ class IntradayPricePredictor:
         Minha ideia aqui foi calcular todas métricas que podem ser uteis para criar as defasagens, por exemplo "viol", porém deixar a escolha de quais usar para o usuário.
         Não pensei em outro jeito melhor para filtrar os regressores diferentes de deixar aqui todos os possiveis regressores e apenas filtrar na hora de concatenar, porém funciona bem.
         """
-        returns = self.data_frames[ticker]
-        extreme = returns.quantile(0.05)
-        viol = (returns < extreme).astype(int)
         
-         # Calcula todos os possíveis regressores
+        df = self.data_frames[ticker]
+        extreme = df[self.return_type].quantile(0.05)
+        viol = (df[self.return_type] < extreme).astype(int)
+        
         all_regressors = {
-            'lagged_returns': pd.DataFrame({f'RET_LAG{lag}': returns.shift(lag) for lag in range(1, lags + 1)}),
+            'lagged_returns': pd.DataFrame({f'RET_LAG{lag}': df[self.return_type].shift(lag) for lag in range(1, lags + 1)}),
             'lagged_viol': pd.DataFrame({f'VIOL_LAG{lag}': viol.shift(lag) for lag in range(1, lags + 1)}),
-            'sq_lagged_returns': pd.DataFrame({f'SQ_RET_LAG{lag}': returns.shift(lag) ** 2 for lag in range(1, lags + 1)})
+            'sq_lagged_returns': pd.DataFrame({f'SQ_RET_LAG{lag}': df[self.return_type].shift(lag) ** 2 for lag in range(1, lags + 1)}),
+            'lagged_volume': pd.DataFrame({f'VOL_LAG{lag}': df['volume'].shift(lag) for lag in range(1, lags + 1)})
         }
-        
-        # lagged_returns = pd.DataFrame({f'RET_LAG{lag}': returns.shift(lag) for lag in range(1, lags + 1)})
-        # lagged_viol = pd.DataFrame({f'VIOL_LAG{lag}': viol.shift(lag) for lag in range(1, lags + 1)})
-        # sq_lagged_returns = lagged_returns**2
-        # sq_lagged_returns.columns = [f'SQ_{name}' for name in sq_lagged_returns.columns]
-        
+
         # Apos calcular todos possiveis regressores eu filtro aqui qual quero usar de fato (talvez mudar isso no futuro p/ n precisar calcular tudo, mas n pensei numa forma melhor)
         X = pd.concat([all_regressors[name] for name in chosen_regressors if name in all_regressors], axis=1)
 
-        # X = pd.concat([lagged_returns, sq_lagged_returns, lagged_viol], axis=1)
-        X.index = returns.index 
+        X.index = df.index 
         Y = viol.rename('Y').to_frame()  
         
         # Devo dropar na aqui?

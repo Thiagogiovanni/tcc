@@ -6,7 +6,7 @@ Model Family:                Binomial   Df Model:                          120
 Link Function:                  Logit   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -3240.4
 Date:                Sun, 17 Mar 2024   Deviance:                       6480.7
-Time:                        18:46:52   Pearson chi2:                 1.44e+04
+Time:                        19:17:25   Pearson chi2:                 1.44e+04
 No. Iterations:                     6   Pseudo R-squ. (CS):            0.04770
 Covariance Type:            nonrobust                                         
 ================================================================================

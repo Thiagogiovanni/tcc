@@ -63,6 +63,7 @@ def all_regressors():
         'lagged_returns',
         'lagged_viol',
         'sq_lagged_returns',
+        'lagged_volume'
         # Para adicionar aqui novos regressores tem que definir em "construct_data_matrix"
     ]
     
