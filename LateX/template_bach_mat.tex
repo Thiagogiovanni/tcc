@@ -1,0 +1,1203 @@
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                    %
+%     Modelo para Trabalho de Conclusão de Curso     %
+%                                                    %
+%                   Template LaTeX                   %
+%                                                    %
+% Elaboração  : NDE - bach. de matemática            %
+%                                                    %
+%                                                    %
+%                                                    %
+% Inicio: abr/2020                                   %
+% Versao corrente: Dez/2020                          %
+%                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+
+\documentclass[12pt,a4paper,oneside]{book}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                Inclusao de pacotes                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%%%%%%%%%%%%%%%%%%%%
+%   Pacotes gerais %
+%%%%%%%%%%%%%%%%%%%%
+%
+% fontes
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}  
+
+% gráficos
+\usepackage{graphics}
+\usepackage{graphicx}
+% usar quando utilizar figuras no formato .eps
+%\usepackage{epsfig}
+%\usepackage[final]{epsfig}
+
+% Se houver figuras em tikz
+%\usepackage{graphicx}
+%\usepackage{tikz}
+%\usetikzlibrary{calc,intersections,through,backgrounds,positioning}
+%\usepgflibrary{arrows}
+%\usepgflibrary{decorations.pathmorphing}
+%
+% usar se for apontar para endereços eletrônicos e fazer os links no pdf.
+\usepackage{hyperref}
+
+
+\usepackage{indentfirst}
+%
+\usepackage{makeidx}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Pacotes usadas com: Windows + MiKTeX   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Clique em Iniciar -> Programas -> MikTeX -> MiKTeX options %
+%   Vá em Languages e marque a caixa português                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%\usepackage[brazil]{babel}
+%
+\usepackage[brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage[ansinew]{inputenc}
+%
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%              Formatação da Página                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% horizontal
+\setlength{\hoffset}{-1in}
+
+\setlength{\oddsidemargin}{3.0cm} 
+
+\setlength{\textwidth}{160mm} % (210mm - 30mm - 20mm)
+
+\setlength{\parindent}{1.25cm} % identação de cada parágrafo
+
+% vertical
+\setlength{\voffset}{-1in}
+\addtolength{\voffset}{2.0cm}
+
+\setlength{\topmargin}{0.0cm}
+
+\setlength{\headheight}{5mm}
+\setlength{\headsep}{5mm}
+
+\setlength{\textheight}{247mm} % (297mm - 30mm - 20mm)
+
+%\setlength{\footskip}{0mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Definicoes                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\linespread{1.5} % espaçamento entre linhas
+%
+\pagestyle{myheadings}
+%
+\makeindex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%             Regras de Divisao Silabica             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hyphenation{Ma-te-má-ti-ca}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%                                            %%%%%%%%%%
+%%%%%%%%%%          Comece a cortar aqui !!!          %%%%%%%%%%
+%%%%%%%%%%                                            %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  Marca de Autoria                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\PutFootnoteNDEBachMat}{ 
+  \footnotetext{
+    Criado por: NDE bacharelado em matemática da UFF. 
+    Versão: 2020\_12\_20.
+    Disponível em: http://ime-uff.org/
+  }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 Capa do Documento                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+ \noindent 
+ \rule{\textwidth}{1ex} 
+ \\ [1ex]
+ \begin{center} 
+  {\Large \textsc{Universidade Federal Fluminense} } 
+  \\ [1.5ex]
+  {\Large \textsc{Instituto de Matemática e Estatística} } 
+  \\ [1.5ex]
+  {\Large \textsc{Curso de Bacharelado em Matemática} } \\
+  \vfill
+  {\Huge Modelo} \\ [2.0ex]
+  {\Huge para} \\ [2.0ex]
+  {\Huge Trabalho de Conclusão de Curso} \\ [1.5ex]
+  {\Large (Versão: A2020M12D20)} \\ 
+  \vfill
+  {\Large
+          \begin{tabular}{ll}
+            Autores:       & Marcio Camoleze de Andrade (2020) \\
+                           & Thiago Muniz de Souza      (2020) \\
+                           &  \\
+            Orientador:    & Prof. Alexandre Santos de la Vega 
+          \end{tabular}
+  } 
+  \\ [3ex]
+  {\Large Niterói -- RJ} 
+  \\ [1.5ex]
+  {\Large Setembro / 2017}
+ \end{center}
+ \vspace{1ex}
+ \rule{\textwidth}{1ex}
+\end{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Apresentação                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% retira a numeração da página até quem um novo \pagenumbering{} seja usado
+\pagenumbering{gobble}
+
+% utilizamos asterisco para que "Parte" nao seja inserida no sumário
+\part*{ {\huge Parte I} \\[2ex] Apresentação}
+
+% utilizamos asterisco para que "Capítulo" nao seja inserida no sumário
+\chapter*{Modelo para monografia}
+
+Este documento foi desenvolvido pelo NDE a fim de orientar 
+todos aqueles que estiverem produzindo uma monografia utilizando o 
+editor de texto \LaTeX.
+%
+Nele, é apresentada a formatação necessária para a elaboração da 
+monografia, segundo os padrões da Universidade Federal Fluminense, 
+bem como algumas dicas para a edição de seu texto.
+
+A formatação segue as orientações encontradas em:
+%
+\begin{itemize}
+ \item 
+   \textbf{\textit{Apresentação de Trabalhos Monográficos de Conclusão de Curso}, 
+           8a. edição revisada, 
+           Estela dos Santos Abreu e José Carlos Abreu Teixeira, 
+           EdUFF, Niterói, Rio de Janeiro, 2005.
+          }
+\end{itemize}
+
+As dicas originaram-se nas seguintes publicações: 
+%
+\begin{enumerate}
+ \item 
+   \textbf{\textit{Metodologia do Trabalho Científico},
+           Antônio J. Severino, 
+           22a. edição, revista (de acordo com a ABNT) e ampliada,
+           7a. reimpressão,
+           Cortez Editora, São Paulo, SP, 2006.
+          }
+ \item 
+   \textbf{\textit{Como se faz uma tese},
+           Umberto Eco,
+           20a. edição,
+           Editora Perspectiva, São Paulo, SP, 2005.
+          }
+\end{enumerate}
+
+\bigskip
+
+\begin{flushright}
+\textbf{NDE bacharelado em Matemática}
+\end{flushright}
+
+\pagebreak
+
+\thispagestyle{empty}
+
+% utilizamos asterisco para que "Parte" nao seja inserida no sumário
+%\part*{ {\huge Parte II} \\[1ex] Modelo de Monografia para a Graduação}
+\part*{ {\huge Parte II} \\[2ex] Modelo \\ para \\ Trabalho de Conclusão de Curso}
+
+\pagebreak
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%                                            %%%%%%%%%%
+%%%%%%%%%%          Pare de cortar  aqui !!!          %%%%%%%%%%
+%%%%%%%%%%                                            %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  Capa da Monografia                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+  \begin{center}
+    \Large{\textsc{Universidade Federal Fluminense} \\
+           \textsc{Instituto de Matemática e Estatística} \\
+           \textsc{Curso de Graduação de Bacharelado em Matemática} 
+          }
+    \par\vfill
+    \LARGE{Nome do autor}
+    \par\vfill
+%    \bigskip
+    \LARGE{Título do trabalho}
+    \par\vfill
+    \Large{Niterói -- RJ\\
+    Ano de conclusão do trabalho}
+  \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+\end{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                Numeracao em romano                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\pagenumbering{roman}
+%\setcounter{page}{2}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   Folha de Rosto                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+
+Nome Completo do Autor do Trabalho
+
+\vfill
+
+Título do trabalho de conclusão de curso
+
+\vspace{3.0cm}
+
+\begin{flushright}
+\begin{minipage}{0.55\textwidth}
+%
+Trabalho de Conclusão de Curso 
+apresentado ao Curso de Graduação de Bacharelado em Matemática. 
+da Universidade Federal Fluminense, 
+como requisito parcial para obtenção 
+do Grau de Bacharel em Matemática. 
+%
+\end{minipage}
+\end{flushright}
+
+\vspace{3.0cm}
+
+Orientador: Prof. Dr. Nome Completo do Orientador
+
+\vfill
+
+Niterói -- RJ\\
+
+Ano de conclusão do trabalho
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                Numeracao em romano                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{roman}
+\setcounter{page}{2}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	            Ficha Catalografica                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+.
+\vfill
+  \begin{figure}[h]
+    \centering
+%    \includegraphics[width=4cm, height=6cm, angle=30, scale=0.5]{FichaCatalografica.jpg}
+    \framebox{
+      \begin{minipage}{0.7\textwidth}
+        \centering
+        A figura referente ao arquivo 
+
+        \vspace{1cm}
+        
+        \textit{FichaCatalografica.jpg} 
+
+        \vspace{1cm}
+        
+        fornecido pela Biblioteca 
+
+        \vspace{1cm}
+        
+        deverá aparecer aqui. 
+
+        \vspace{1cm}
+        
+        \textbf{ATENÇÃO: Na versão impressa, 
+        essa página deverá ficar 
+        no verso da página anterior.}
+      \end{minipage}
+    } 
+  \end{figure}
+\vfill
+.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                 Folha de Aprovação                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+
+Nome Completo do Autor do Trabalho
+
+\vspace{1.0cm}
+
+Título do trabalho de conclusão de curso
+
+\vspace{1.0cm}
+
+\begin{flushright}
+\begin{minipage}{0.55\textwidth}
+%
+Trabalho de Conclusão de Curso 
+apresentado ao Curso de Graduação de Bacharelado em Matemática. 
+da Universidade Federal Fluminense, 
+como requisito parcial para obtenção 
+do Grau de Bacharel em Matemática. 
+%
+\end{minipage}
+\end{flushright}
+
+\vfill
+
+\begin{flushleft}
+
+Aprovada em DIA de MÊS de ANO.
+
+\end{flushleft}
+
+\vfill
+
+BANCA EXAMINADORA
+
+\vfill
+
+\hrulefill \\Prof. Dr. Nome Completo do Orientador - Orientador\\Universidade Federal Fluminese - UFF\\
+
+\vfill
+
+\hrulefill \\Prof. Dr. Nome Completo do Co-Orientador - Co-Orientador\\Universidade Federal Fluminese - UFF\\
+
+\vfill
+
+\hrulefill \\Prof. Nome Completo do Professor\\INSTITUIÇÃO\\
+
+\vfill
+
+\hrulefill \\Prof. Nome Completo do Professor\\INSTITUIÇÃO\\
+
+\vfill
+
+Niterói -- RJ\\
+
+Ano de conclusão do trabalho
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%            Resumo na língua vernácula            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Resumo}
+%
+\addcontentsline{toc}{chapter}{Resumo}
+%
+\thispagestyle{myheadings}
+%
+Esta parte é destinada ao resumo de seu trabalho. 
+%
+Ela deve ser escrita na língua vernácula e em um idioma de grande divulgação 
+(inglês, francês, espanhol, por exemplo). 
+%
+É aconselhável que seja feita por último, pois após acabar o trabalho será possível 
+uma compreensão mais abrangente do mesmo. 
+%
+O resumo não deve possuir nenhum aprofundamento teórico, 
+mas sim conter a síntese dos pontos relevantes da monografia, 
+tais como gênero do trabalho, finalidade, metodologia, resultados e conclusões. 
+%
+Ele deve estar na terceira pessoa do singular, 
+possuir uma extensão de 150 a 500 palavras digitadas em espaço simples e em parágrafo único. 
+%
+Deve ser seguido pelas palavras-chave de seu trabalho.\\
+
+Palavras-chave: Monografia. \LaTeX. Dicas. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Abstract                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Abstract}
+%
+\addcontentsline{toc}{chapter}{Abstract}
+%
+\thispagestyle{myheadings}
+%
+This part is destinated to the abstract of your monograph. 
+%
+It must be written in the vernacular language and in an idiom of great popularization 
+(English, French, Spanish, for example). 
+%
+This part should be done at last, because just after finishing the work 
+it will be possible an overall understanding of it. 
+%
+The abstract should not bring any further information, 
+it is just the summary of the relevants aspects of the monograph, 
+such as work gender, finality, methodology, results and conclusions. 
+%
+It must be written impersonally, to possess an extension from 150 to 500 words 
+typed in simple space and in only one paragraph. 
+%
+It must be followed by the keywords of your monograph.\\
+
+Keywords: Monograph. LaTeX. Hints.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	                 Dedicatória                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{flushright}
+\begin{minipage}{0.5\textwidth}
+% espaço do topo até o início da dedicatória 
+\vspace{15.0cm} 
+%
+Espaço reservado para a dedicatória.
+\end{minipage}
+\end{flushright}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	                 Agradecimentos                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Agradecimentos}
+\addcontentsline{toc}{chapter}{Agradecimentos}
+
+\thispagestyle{myheadings}
+
+\noindent
+
+Espaço reservado para os agradecimentos.
+
+Agradecimento 1.
+
+Agradecimento 2.
+
+...
+
+Agradecimento N.
+
+Os agradecimentos devem ser sucintos e específicos
+a cada tipo de ajuda, a cada ideia relevante, 
+a cada empréstimo significativo, pois um agradecimento
+é, de certa forma, um crédito dado a alguém \cite{norma:esjo2005}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   Lista de Figuras                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\listoffigures
+%
+\addcontentsline{toc}{chapter}{Lista de Figuras}
+%
+\thispagestyle{myheadings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   Lista de Tabelas                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\listoftables
+%
+\addcontentsline{toc}{chapter}{Lista de Tabelas}
+%
+\thispagestyle{myheadings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Sumário                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\tableofcontents
+%
+\thispagestyle{myheadings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+\PutFootnoteNDEBachMat
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                Numeracao em arabico                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\clearpage
+%
+\pagenumbering{arabic}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        Texto                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introdução}
+%
+\thispagestyle{empty} % retira numeracao da pagina, conforme as normas de apresentacao.
+%
+A monografia em si é composta por três etapas: 
+introdução, desenvolvimento e conclusão. 
+\index{partes da monografia}
+%
+São nessas três etapas que o trabalho será defendido, 
+com argumentos lógicos e baseados em dados reais.
+
+A introdução é a parte inicial da sua monografia.\index{partes da monografia!introdução}  
+%
+Nela, os temas de seu trabalho serão mostrados, mas sem muito aprofundamento teórico. 
+%
+É importante não confundir a introdução com o resumo. 
+%
+Eles, até certo ponto, possuem um grau de semelhança, entretanto, 
+a introdução é muito mais aprofundada que o resumo e é escrita em vários parágrafos, 
+sem restrição de número de palavras.
+
+Para a elaboração da introdução é aconselhável a execução por partes. 
+%
+A cada tema pesquisado, escreva o seu correspondente na introdução, 
+pois desse modo quem estiver escrevendo terá muito mais o que falar sobre o tema 
+e o fará com mais precisão do que se fosse escrever sobre todos os temas de uma vez.
+
+Enfim, a introdução é, como o próprio nome diz, a parte introdutória da monografia. 
+%
+Nela, os temas serão apresentados e já pode ser definida a maneira como determinado tema será abordado, 
+desde que não se entre em muitos detalhes acerca do mesmo.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+\chapter{Primeiro capítulo da etapa ``Desenvolvimento''}
+%
+\thispagestyle{empty} % retira numeracao da pagina, conforme as normas de apresentacao.
+%
+O desenvolvimento\index{partes da monografia!desenvolvimento}
+é a parte na qual serão feitas as argumentações do seu trabalho 
+e onde seus dados serão confrontados, para uma futura conclusão das ideias. 
+%
+Corresponde à etapa mais trabalhosa de sua monografia e à mais importante também.
+
+Os parágrafos podem ser curtos ou longos, dependendo das ideias apresentadas neles. 
+%
+Entretanto, parágrafos longos exigem certa atenção extra, pois podem ficar cansativos e prolixos. 
+%
+Por conta disso, é aconselhável que o desenvolvimento seja escrito inicialmente como rascunho. 
+%
+Faça a revisão deste algumas vezes, para aprimorá-lo, uma vez que, sendo esta parte longa, 
+dificilmente será escrita perfeitamente em um primeiro momento.
+	
+Portanto, o desenvolvimento é o centro das argumentações do seu trabalho. 
+%
+Nele serão expostas ideias que contribuirão para a persuasão do leitor.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+\chapter{Segundo capítulo da etapa ``Desenvolvimento''}
+%
+\thispagestyle{empty} % retira numeracao da pagina, conforme as normas de apresentacao.
+%
+No ambiente de edição de texto \LaTeX, 
+os textos podem ser divididos em fragmentos
+(parte\index{fragmentação do texto!parte}, 
+ capítulo\index{fragmentação do texto!capítulo}, 
+ seção\index{fragmentação do texto!seção}, 
+ subseção\index{fragmentação do texto!subseção}, 
+ subsubseção\index{fragmentação do texto!subsubseção}).
+%
+Em cada um dos fragmentos de um texto,
+o primeiro parágrafo\index{parágrafo} nunca é identado.
+
+
+Texto do segundo parágrafo.
+Continuação do texto.
+Continuação do texto.
+Continuação do texto.
+Continuação do texto.
+
+Texto de um novo parágrafo.
+Continuação do texto.
+Continuação do texto.
+Continuação do texto.
+Continuação do texto.
+
+
+\section{Primeira seção do segundo capítulo}
+%
+Texto inicial... Texto inicial... 
+Texto inicial... Texto inicial... 
+Texto inicial... Texto inicial... 
+Texto inicial... Texto inicial... 
+Texto inicial... Texto inicial... 
+
+\section{Segunda seção do segundo capítulo}
+%
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+
+\vfill
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+\section{Terceira seção do segundo capítulo}
+%
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+
+
+\section{Quarta seção do segundo capítulo}
+%
+Um alerta sobre a divisão do texto em subpartes 
+deve ser feito, conforme exemplo abaixo. 
+
+\subsection{Primeira subseção da quarta seção do segundo capítulo}
+%
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+Mais texto... Mais texto... 
+
+\subsubsection{Primeira subsubseção da primeira subseção 
+               da quarta seção do segundo capítulo}
+%
+Deve-se notar que uma subsubseção não é mais numerada,
+como é feito com o capítulo, com a seção e com a subseção.
+
+No \LaTeX, 
+considera-se que a quebra excessiva do texto em subpartes 
+confunde o leitor,
+pois, além de se ater ao assunto do texto, 
+ele ainda é obrigado a manter sua atenção presa à estrutura do texto. 
+
+Ao invés de quebrar o texto em inúmeras subpartes,
+recomenda-se que o texto seja melhor construído,
+chegando-se, no máximo, na profundidade de uma subsubseção.
+
+Para mais informações sobre esse tópico, 
+consulte o \textit{website} do 
+\textit{Comprehensive TeX Archive Network}~\cite{website:ctan}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+\chapter{Tópicos diversos da etapa ``Desenvolvimento''}
+%
+\thispagestyle{empty} % retira numeracao da pagina, conforme as normas de apresentacao.
+
+\section{Citações longas}
+%
+\begin{flushright}
+ \begin{minipage}{0.75\textwidth} %     75% de 160 --> margem para citações longas
+  \begin{quotation}
+``O importante é não parar de questionar. 
+A curiosidade tem sua própria razão para existir. 
+Uma pessoa não pode deixar de se sentir reverente ao contemplar 
+os mistérios da eternidade, da vida, da maravilhosa estrutura da realidade. 
+Basta que a pessoa tente apenas compreender um pouco mais desse mistério a cada dia. 
+Nunca perca uma sagrada curiosidade''. 
+Albert Einstein 
+  \end{quotation}
+ \end{minipage}
+\end{flushright}
+
+\section{Tabelas}
+%
+A Tabela~\ref{tab:TabOr} e a Tabela~\ref{tab:TabNor} apresentam exemplos de tabelas simples.
+\index{tabelas!simples}
+%
+\begin{table}[h]
+	\centering
+		\begin{tabular}{|c|c|c|}
+		  \hline
+			A & B & A + B \\ \hline
+			0 & 0 & 0 \\ \hline
+			0 & 1 & 1 \\ \hline
+			1 & 0 & 1 \\ \hline
+			1 & 1 & 1 \\ \hline
+		\end{tabular}
+		\caption{Tabela verdade para porta OR.}
+		\label{tab:TabOr}
+\end{table}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+\clearpage
+
+%
+\begin{table}[h]
+	\centering
+		\begin{tabular}{|c|c|c|}
+		  \hline
+			A & B & $\overline{A + B}$ \\ \hline
+			0 & 0 & 1 \\ \hline
+			0 & 1 & 0 \\ \hline
+			1 & 0 & 0 \\ \hline
+			1 & 1 & 0 \\ \hline
+		\end{tabular}
+		\caption{Tabela verdade para porta NOR.}
+		\label{tab:TabNor}
+\end{table}
+%
+
+É possível criar uma tabela com multicolunas, 
+\index{tabelas!com multicolunas}
+onde uma célula pode ser construída 
+com o agrupamento de células vizinhas em uma linha, 
+conforme ilustrado na Tabela~\ref{tab:TabMulticolunas}.
+%
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|cc|} \hline
+		1a linha 1a coluna & \multicolumn{2}{|c|}{2a e 3a colunas mescladas nesta linha}\\ \hline
+		2a linha 1a coluna & 2a linha 2a coluna & 2a linha 3a coluna \\
+		3a linha 1a coluna & 3a linha 2a coluna & 3a linha 3a coluna \\ \hline
+	\end{tabular}
+	\caption{Tabela utilizando o comando \textit{multicolumn}.}
+	\label{tab:TabMulticolunas}
+\end{table}
+
+
+\section{Figuras}
+%
+Para inserir figuras ao longo do texto, 
+deve-se colocar o pacote \textit{graphicx} no preâmbulo e, depois, 
+usar o comando que permite inserir uma figura.
+
+Por exemplo, o texto  
+
+%
+\begin{verbatim}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=4cm, height=6cm, angle=30, scale=0.5]{grafico1.jpg}
+    \caption{Universo e Reverso.}
+    \label{fig:NomeDeReferenciaParaAFigura}
+  \end{figure}
+\end{verbatim}
+%
+%\noindent
+irá gerar o resultado presente na Figura~\ref{fig:NomeDeReferenciaParaAFigura}.
+
+No exemplo acima, o arquivo \textit{grafico1.jpg} 
+deve estar no mesmo diretório do arquivo que contém o texto. 
+
+\vfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+\clearpage
+
+%
+  \begin{figure}[h]
+    \centering
+%    \includegraphics[width=4cm, height=6cm, angle=30, scale=0.5]{grafico1.jpg}
+    \framebox{
+      \begin{minipage}{0.7\textwidth}
+        \centering
+        A figura referente ao arquivo 
+
+        \vspace{1cm}
+        
+        \textit{grafico1.jpg} 
+
+        \vspace{1cm}
+        
+        deverá aparecer aqui. 
+      \end{minipage}
+    } 
+    \caption{Título da figura.}
+    \label{fig:NomeDeReferenciaParaAFigura}
+  \end{figure}
+%
+
+Deve ser observado que a Figura~\ref{fig:NomeDeReferenciaParaAFigura}, 
+referente ao arquivo \textit{grafico1.jpg} não foi adicionada ao documento 
+para que este \textit{template} fosse disponibilizado em um arquivo único.
+
+
+\section{Referências}
+%
+Abaixo, 
+são apresentados alguns exemplos simples de referências bibliográficas.
+%
+Uma referência completa sobre todos os tipos de citações pode ser encontrada
+em \cite{norma:esjo2005}.
+
+Exemplos:
+
+Exemplo de referência simples \cite{livro:circuit}.
+
+Exemplo de referência dupla \cite{livro:circuit} e \cite{book:signal}.
+
+Exemplo de referência múltipla ($> 2$ citações) \cite{website:ctan}--\cite{book:signal}.
+
+
+\section{Equações}
+%
+Existem diversas formas de incluir equações em um documento elaborado em \LaTeX.
+%
+Deve-se notar que elas podem ser inseridas tanto no meio do texto como em destaque.
+
+No meio do texto: ``A equação $a^{2}=b^{2}+c^{2}$ representa...''.
+
+Em destaque: \[ a^{2}=b^{2}+c^{2} \]
+
+É possível escrever equações que envolvam símbolos utilizados em Cálculo.
+%
+A seguir, serão apresentados alguns exemplos.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+\clearpage
+
+
+Série de Fourier na forma complexa:
+%
+\begin{equation}
+f(t) = \sum_{n=-\infty}^{\infty} c_{n} \; e^{i \left( n \frac{ \pi }{L} t \right) } 
+\  , 
+\end{equation}
+%
+onde 
+%
+\begin{equation}
+c_{n} = \frac{1}{2L} \int_{c}^{c+2L} f(t) \, c_{n} \; e^{-i \left( n \frac{ \pi }{L} t \right) } \; dt 
+\  .
+\end{equation}
+%
+
+\vspace{5mm}
+
+Equações de Maxwell para campos variantes no tempo:
+
+Na forma integral:
+%
+\begin{equation}
+	\oint \vec{H} \cdot d\vec{L} = \int \Bigg( \vec{J}+\frac{\partial \vec{D}}{\partial t} \Bigg) d\vec{S} 
+\end{equation}
+%
+\begin{equation}
+	\oint \vec{E} \cdot d\vec{L} = - \int \frac{\partial \vec{B}}{\partial t} \; d\vec{S} 
+\end{equation}
+%
+\begin{equation}
+	\int_{S} \vec{D} \cdot d\vec{S} = \int_{V} \rho \; d\vec{V}
+\end{equation}
+%
+\begin{equation}
+	\int_{S} \vec{B} \cdot d\vec{S} = 0
+\end{equation}
+%
+
+Na forma diferencial:
+%
+\begin{equation}
+	\nabla \times \vec{H} = \vec{J}+\frac{\partial \vec{D}}{\partial t}
+\end{equation}
+%
+\begin{equation}
+	\nabla \times \vec{E} = - \frac{\partial \vec{B}}{\partial t}
+\end{equation}
+%
+\begin{equation}
+	\nabla \cdot \vec{D} = \rho
+\end{equation}
+%
+\begin{equation}
+	\nabla \cdot \vec{B} = 0
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Conclusão                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusão}
+%
+\thispagestyle{empty} % retira numeracao da pagina, conforme as normas de apresentacao.
+%
+A conclusão\index{partes da monografia!conclusão} 
+é a finalização do trabalho textual. 
+%
+Com base nas argumentações dos itens do desenvolvimento, 
+será realizada a conclusão das ideias apresentadas na monografia.
+
+Nesta etapa deve ser usada uma linguagem mais direta, visando à persuasão do leitor. 
+%
+Além disso, é importante evitar períodos muito longos e 
+fazer uso de conectivos para juntar as ideias, 
+a fim de tornar o texto o mais lógico possível. 
+%
+Uma conclusão fraca arrasará sua monografia, 
+pois um trabalho sem um ponto final é um trabalho inacabado. 
+%
+Portanto, muita atenção com a conclusão, 
+pois ela pode decidir se seu trabalho foi bem sucedido ou não.
+
+Enfim, a conclusão é a convergência das ideias tratadas em toda sua monografia, 
+visto que há um encaminhamento das mesmas, 
+através de pensamentos lógicos, para uma definição.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          Sugestões para trabalhos futuros            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Sugestões para trabalhos futuros}
+%
+\thispagestyle{empty} % retira numeracao da pagina, conforme as normas de apresentacao.
+%
+Com base no trabalho desenvolvido, diversas vertentes de trabalhos futuros podem ser identificadas.
+%
+Tais vertentes, assim como os trabalhos individuais em cada uma das vertentes, podem ser listados e resumidos.
+%
+Dessa forma, novas pesquisas podem ser sugeridas, dando continuidade ao trabalho em questão.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  Referências Bibliográficas                     % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{10}
+%
+\addcontentsline{toc}{chapter}{Referências Bibliográficas}
+%
+\thispagestyle{myheadings}
+%
+\bibitem{norma:esjo2005}
+        {Abreu, Estela dos Santos e Teixeira, José Carlos Abreu. 
+        \textit{Apresentação de Trabalhos Monográficos de Conclusão de Curso, 8a. edição revisada}, 
+        EdUFF, 2005.}
+%
+\bibitem{website:ctan}{\textbf{CTAN} (Comprehensive TeX Archive Network), \textit{http://www.ctan.org/}.}
+% Este site é referência mundial para materiais relacionados ao TeX e LaTeX.
+%
+\bibitem{livro:circuit}{JOHNS, David A. and MARTIN, Ken. \textit{Analog Integrated Circuit Design}, 
+John Wiley \& Sons, Inc., 1997.}
+%
+\bibitem{book:signal}{MITRA, Sanjit K. , \textit{Digital Signal Processing - A Computer-Based Approach.}, 
+The McGraw-Hill Companies, Inc., 1998.}
+%
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Corte essa linha !!! %
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnote de autoria
+%\PutFootnoteNDEBachMat
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Insercao do Indice Remissivo     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\cleardoublepage
+%
+%   nao eh necessario se usar classe memoir...
+\phantomsection
+%
+% Acrescenta Indice Remissivo em Table of Contents.
+%
+%   nao eh necessario se usar classe memoir...
+\addcontentsline{toc}{chapter}{Índice Remissivo}
+%
+%
+% Makeindex Database 
+% (baseada nos arquivos: XXX.idx --> xxx.ind --> xxx.ilg)
+%
+\printindex
+%
+%
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%
+% Fim do modelo %
+%%%%%%%%%%%%%%%%%
