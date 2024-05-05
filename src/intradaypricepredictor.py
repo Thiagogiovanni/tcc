@@ -241,21 +241,141 @@ class IntradayPricePredictor:
         plt.savefig(f'{folder_id}/histogram_adjusted_probabilities.png')
         plt.close()
 
+    def plot_probabilities_histograms_by_outcome(self, folder_id, test_data, test_predicted_probs, optimal_threshold_train):
+        
+        """
+        Gera dois histogramas das probabilidades ajustadas para a base de TESTE,
+        separados pelo resultado real (queda ocorre vs. queda não ocorre),
+        com uma linha vertical indicando o limiar crítico da base de TREINO.
+        
+        Parâmetros:
+        - test_data: DataFrame com os dados de teste incluindo a coluna 'Y' para o resultado real.
+        - test_predicted_probs: Probabilidades preditas para a base de teste.
+        - optimal_threshold_train: Limiar ótimo encontrado na base de treino.
+        """
+        
+        probs_when_drop_occurs = test_predicted_probs[test_data['Y'] == 1]
+        probs_when_drop_does_not_occur = test_predicted_probs[test_data['Y'] == 0]
+        
+        # Define o espaço do plot
+        fig, axs = plt.subplots(2, 1, figsize=(10, 8))
+        
+        # Histograma das probabilidades onde queda ocorre
+        axs[0].hist(probs_when_drop_occurs, bins=50, alpha=0.5, color='red')
+        axs[0].axvline(x=optimal_threshold_train, color='black', linestyle='--')
+        axs[0].set_title('QUEDA OCORRE (BASE TESTE)')
+        axs[0].set_xlabel('Probabilidades Ajustadas')
+        axs[0].set_ylabel('Frequência')
+        
+        # Histograma das probabilidades onde queda não ocorre
+        axs[1].hist(probs_when_drop_does_not_occur, bins=50, alpha=0.5, color='blue')
+        axs[1].axvline(x=optimal_threshold_train, color='black', linestyle='--')
+        axs[1].set_title('QUEDA NÃO OCORRE (BASE TESTE)')
+        axs[1].set_xlabel('Probabilidades Ajustadas')
+        axs[1].set_ylabel('Frequência')
+        
+        # Ajustes finais
+        plt.tight_layout()
+        
+        # Salva o gráfico
+        plt.savefig(f'{folder_id}/histograms_by_outcome.png')
+        plt.close()
+        
+    def sum_of_squares_metrics(self, y_true, predicted_probs, num_predictors):
+        """
+        Calculate r^2, R_ss^2 and R^2_ss_adj for the model.
+        """
+        # Mean of the observed data
+        y_bar = np.mean(y_true)
+        
+        # Predicted probabilities
+        y_pred = predicted_probs
+        
+        # Total Sum of Squares (SST)
+        sst = np.sum((y_true - y_bar)**2)
+        
+        # Residual Sum of Squares (SSR)
+        ssr = np.sum((y_pred - y_bar)**2)
+        
+        # Sum of Squared Errors (SSE)
+        sse = np.sum((y_true - y_pred)**2)
+        
+        # Pearson's correlation squared (r^2)
+        r_squared = (np.corrcoef(y_true, y_pred)[0, 1])**2
+        
+        # Coefficient of Determination (R^2)
+        R_ss_squared = 1 - sse / sst
+        
+        # Adjusted Coefficient of Determination (R^2 adjusted)
+        n = len(y_true)  # Number of observations
+        p = num_predictors  # Number of predictors
+        R_ss_squared_adj = 1 - (sse / (n - p - 1)) / (sst / (n - 1))
+        
+        return r_squared, R_ss_squared, R_ss_squared_adj
+    
+    def plot_predictions_with_errors(self, ticker, folder_id, test_data, predicted_probs, threshold):
+        """
+        Plota a evolução dos retornos e das probabilidades ajustadas com destaque para os erros de classificação.
 
-    def fit_and_evaluate_model(self, ticker, folder_id, train_start_date, train_end_date, test_end_date):
+        Parâmetros:
+            test_data (DataFrame): DataFrame contendo os dados de teste, incluindo 'Y' para resultados reais e 'return' para os valores de retorno.
+            predicted_probs (array): Array de probabilidades ajustadas previstas pelo modelo.
+            threshold (float): Limiar utilizado para a classificação binária.
+        """
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        data_return = self.data_frames[ticker]['log_return']
+        dates_test = self.test_dates[ticker]
+        
+        data_return = data_return[(data_return.index > dates_test[0]) & (data_return.index <= dates_test[1])]
+        
+        # Criando a figura e o eixo
+        fig, ax = plt.subplots(figsize=(10, 6))
+
+        # Plotando os retornos como uma linha
+        ax.plot(test_data.index, data_return, label='Retornos', color='grey', alpha=0.7)
+
+        # Adicionando as barras verticais para probabilidades ajustadas
+        ax.vlines(test_data.index, 0, predicted_probs, color='black', alpha=0.5, label='Probabilidades Ajustadas')
+
+        # Encontrando e destacando as classificações erradas
+        for idx, (true, prob) in enumerate(zip(test_data['Y'], predicted_probs)):
+            if (true == 1 and prob < threshold) or (true == 0 and prob >= threshold):
+                ax.vlines(test_data.index[idx], 0, prob, color='red', alpha=0.7)
+
+        # Configurando o título e os rótulos
+        ax.set_title('Evolução dos Retornos e Probabilidades Ajustadas com Erros de Classificação')
+        ax.set_xlabel('Data')
+        ax.set_ylabel('Probabilidades Ajustadas / Retornos')
+
+        # Adicionando a legenda
+        ax.legend()
+
+        # Mostrando o gráfico
+        plt.tight_layout()
+        plt.savefig(f'{folder_id}/predictions_with_errors.png')
+
+    def fit_and_evaluate_model(self, ticker, folder_id, train_start_date, train_end_date, test_end_date, columns_to_drop = None, refine_model = False):
         
         data = self.data_frames[f'{ticker}_matrix']
         
         # Armazeno para usar depois
         self.train_dates[ticker] = (pd.to_datetime(train_start_date), pd.to_datetime(train_end_date))
-        self.test_dates[ticker] = (pd.to_datetime(train_end_date) + pd.Timedelta(days=1), pd.to_datetime(test_end_date))
+        self.test_dates[ticker] = (pd.to_datetime(train_end_date), pd.to_datetime(test_end_date))
 
         train_data = data[(data.index >= train_start_date) & (data.index <= train_end_date)]
         test_data = data[(data.index > train_end_date) & (data.index <= test_end_date)]
         
+        if columns_to_drop is not None:
+            train_data = train_data.drop(columns=columns_to_drop)
+            test_data = test_data.drop(columns=columns_to_drop)
+            
         predictors = train_data.columns.difference(['Y'])
         formula = 'Y ~ ' + ' + '.join(predictors)
         model = smf.glm(formula=formula, data=train_data, family=sm.families.Binomial()).fit()
+        
+        if refine_model:
+            return model
         
         aic_score = model.aic
         bic_score = model.bic
@@ -304,6 +424,21 @@ class IntradayPricePredictor:
         
         self.plot_adjusted_probabilities_histogram(folder_id, test_predictions, optimal_threshold_train)
         
+        if columns_to_drop is not None and refine_model == False:  
+            self.plot_probabilities_histograms_by_outcome(folder_id, test_data, test_predictions, optimal_threshold_train)
+            
+            # Calculando e registrando as métricas de soma dos quadrados
+            r_squared, R_ss_squared, R_ss_squared_adj = self.sum_of_squares_metrics(
+                train_data['Y'], 
+                train_predictions, 
+                len(predictors)
+            )
+            print(f"r^2 (Pearson correlation squared): {r_squared}")
+            print(f"R_ss^2 (coefficient of determination): {R_ss_squared}")
+            print(f"R^2_ss_adj (adjusted coefficient of determination): {R_ss_squared_adj}")
+            
+            self.plot_predictions_with_errors(ticker, folder_id, test_data, test_predictions, optimal_threshold_train)
+
         return optimal_threshold_train, auc_score_train, optimal_threshold_test, auc_score_test, aic_score, bic_score, fnr_train, fnr_using_train, fnr_test, fp_train, fp_using_train, fp_test
 
 

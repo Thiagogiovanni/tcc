@@ -75,7 +75,7 @@ def main():
             os.makedirs(folder_id + '/test')
             os.makedirs(folder_id + '/test_with_optimal_threshold_train')
             
-        optimal_threshold_train, auc_score_train, optimal_threshold_test, auc_score_test, aic_score, bic_score, fnr_train, fn_test_using_train_threshold, fnr_test, fp_train, fp_using_train, fp_test = predictor.fit_and_evaluate_model(ticker, folder_id, train_start_date='2023-01-01', train_end_date='2023-01-31',test_end_date='2023-03-01')
+        optimal_threshold_train, auc_score_train, optimal_threshold_test, auc_score_test, aic_score, bic_score, fnr_train, fn_test_using_train_threshold, fnr_test, fp_train, fp_using_train, fp_test = predictor.fit_and_evaluate_model(ticker, folder_id, train_start_date='2023-01-01', train_end_date='2023-01-31',test_end_date='2023-03-01', columns_to_drop = None, refine_model = False)
         
         print(color + f'-'*50)
         print(color + f'Ticker: {ticker}')
@@ -97,6 +97,61 @@ def main():
         print(color + f'Mean FN and FP test: {(fnr_test+fp_test)/2}')
         print(Style.RESET_ALL + f'-'*50)
                         
+    final_model = refine_model(predictor, ticker, train_start_date='2023-01-01', train_end_date='2023-01-31', test_end_date='2023-03-01')    
+    print(final_model)
+    
+    
+def refine_model(predictor, ticker, train_start_date, train_end_date, test_end_date, significance_level=0.05):
+    
+    folder_id = f'./results/{ticker}_refined_model_5_percent_significance_level'
+    
+    if not os.path.exists(folder_id):
+            os.makedirs(folder_id)
+            os.makedirs(folder_id + '/train')
+            os.makedirs(folder_id + '/test')
+            os.makedirs(folder_id + '/test_with_optimal_threshold_train')
+            
+    model = predictor.fit_and_evaluate_model(ticker, folder_id, train_start_date, train_end_date, test_end_date, columns_to_drop = None, refine_model = True)
+    all_non_significant_regressors = []
+    color = Fore.CYAN
+    
+    while True:
+        
+        p_values = model.pvalues
+        max_p_value = p_values.max()
+        if max_p_value < significance_level:
+            break
+
+        non_significant_regressor = p_values.idxmax()
+        all_non_significant_regressors.append(non_significant_regressor)
+        model = predictor.fit_and_evaluate_model(ticker, folder_id, train_start_date, train_end_date, test_end_date, columns_to_drop = all_non_significant_regressors, refine_model = True)
+
+
+    # Agora com o modelo refinado vamos avaliar o modelo
+    optimal_threshold_train, auc_score_train, optimal_threshold_test, auc_score_test, aic_score, bic_score, fnr_train, fn_test_using_train_threshold, fnr_test, fp_train, fp_using_train, fp_test = predictor.fit_and_evaluate_model(ticker, folder_id, train_start_date='2023-01-01', train_end_date='2023-01-31',test_end_date='2023-03-01', columns_to_drop = all_non_significant_regressors, refine_model = False)
+    
+    print(color + f'-'*50)
+    print(color + f'Ticker: {ticker}')
+    print(color + f'Regressors: {model.pvalues.index.tolist}')
+    print(color + f'Results:')
+    print(color + f'Optimal threshold for train: {optimal_threshold_train:3f}, AUC score for train: {auc_score_train:3f}')
+    print(color + f'Optimal threshold for test: {optimal_threshold_test:3f}, AUC score for test: {auc_score_test:3f}')
+    print(color + f'AIC Score: {aic_score}')
+    print(color + f'BIC Score: {bic_score}')
+    print(color + f'FN Train: {fnr_train}')
+    print(color + f'FP Train: {fp_train}')
+    print(color + f'FN Test: {fnr_test}')
+    print(color + f'FP Test: {fp_test}')
+    print(color + f'FN Test using optimal threshold for train: {fn_test_using_train_threshold}')
+    print(color + f'FP Test using optimal threshold for train: {fp_using_train}')
+    print(color + f'Mean FN and FP test using optimal threshold for train: {(fn_test_using_train_threshold+fp_using_train)/2}')
+    print(color + f'Mean FN and FP test: {(fnr_test+fp_test)/2}')
+    print(Style.RESET_ALL + f'-'*50)
+        
+    final_regressors = model.pvalues.index.tolist()
+
+    return final_regressors
+
 def URLS():
     return {
         # 'AAPL': 'https://frd001.s3-us-east-2.amazonaws.com/AAPL_1min_sample_firstratedata.zip',
