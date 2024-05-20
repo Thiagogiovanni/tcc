@@ -13,6 +13,9 @@ def main():
     predictor = IntradayPricePredictor(urls, retornos_definidos, return_type)
 
     models_defasagens = {
+        "modelo_simulacao": {
+            "lagged_viol": 5
+        },
         "aic_score": {
             "lagged_returns": 20,
             "lagged_viol": 20,
@@ -50,7 +53,7 @@ def main():
     }        
     
     
-    model_to_run = 'mean_fp_fn_test_using_train_threshold'
+    model_to_run = 'modelo_simulacao'
     
     color = Fore.CYAN
     ticker = 'TSLA'
@@ -96,9 +99,9 @@ def main():
         print(color + f'Mean FN and FP test using optimal threshold for train: {(fn_test_using_train_threshold+fp_using_train)/2}')
         print(color + f'Mean FN and FP test: {(fnr_test+fp_test)/2}')
         print(Style.RESET_ALL + f'-'*50)
-                        
-    final_model = refine_model(predictor, ticker, train_start_date='2023-01-01', train_end_date='2023-01-31', test_end_date='2023-03-01')    
-    print(final_model)
+
+    # final_model = refine_model(predictor, ticker, train_start_date='2023-01-01', train_end_date='2023-01-31', test_end_date='2023-03-01')    
+    # print(final_model)
     
     
 def refine_model(predictor, ticker, train_start_date, train_end_date, test_end_date, significance_level=0.05):
